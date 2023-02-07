@@ -174,12 +174,21 @@ table {
   left: 321px;
 
 }
+.text-airpods {
+  color: black;
+}
+.text-ipad {
+  position: absolute;
+  bottom: 147px;
+  left: 390px;
+}
 .text-AppleTV {
   top: 117px;
   left: 43px;
   color: black;
 
 }
+
 .btn {
   width: 150px;
   height: 50px;
@@ -194,6 +203,39 @@ table {
   position: absolute;
   bottom: 167px;
   left: 437px;
+}
+
+.btn:hover {
+  background-color: #1c3a71;
+}
+
+
+
+.disable-btn:hover {
+  background-color: #c5c4c4;
+}
+.card-availability {
+  margin-bottom: 7px;
+  color: #767272;
+  width: 100px;
+  text-align: center;
+}
+.card-availability::before {
+  content: ' ';
+  background: url('../img/icons/available.png');
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin: 0 8px -5px 0;
+}
+
+.card-non-availability::before {
+  content: ' ';
+  background: url('../img/icons/none.png');
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin: 0 8px -5px 0;
 }
 
 .btn-AppleTV {
@@ -218,10 +260,6 @@ table {
   box-sizing: border-box;
   font-size: 18px;
   font-family: arial, sans-serif;
-  /* .algolia-autocomplete {
-    display: block;
-    height: 100%;
-  } */
 }
 
 .searchbox__wrapper {
@@ -441,7 +479,14 @@ table {
 }
 
 /* Filter */
-
+.sort-filter {
+  position: absolute;
+  right: 150px;
+  top: 7px; 
+  width: 150px;
+  height: 48px;
+  
+}
 .filter-btn {
   position: absolute;
   right: 70px;
@@ -484,7 +529,7 @@ table {
 
 /* Accordion */
 
-.accordeon-container {
+.accordion-container {
   width: 326px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   background: #FFFFFF;
@@ -497,6 +542,7 @@ table {
   /* /  */ /* /  */ /* /  */ /* /  */
 
 /* Style the buttons that are used to open and close the accordion panel */
+
 .accordion {
   background-color: #EDF3FF;
   color: #444;
@@ -511,11 +557,20 @@ table {
   border-color: #DDDDDD;
   outline: none;
   transition: 0.4s;
+  display: flex;
+  justify-content: space-between;
 }
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .accordion:hover {
+.active {
   background-color: #FFFFFF;
+}
+
+.active img {
+  transform: rotate(90deg);
+}
+
+.accordion:hover {
+  background-color: #dce2ee;
 }
 
 /* Style the accordion panel. Note: hidden by default */
@@ -525,96 +580,61 @@ table {
   display: none;
   overflow: hidden;
 }
-/* Pannel-price */
-.panel-price  {
-  padding: 25px 0 0 40px;
-}
-.from,
-.to {
-  font-size: 14px;
-  line-height: 16px;
-  
-}
-.from {
-  margin-right: 40px;
-  margin-bottom: 40px;
-  margin-top: 60px;
-}
-.to {
-  margin-right: 56px;
-}
-.field {
-  width: 190px;
-  height: 38px;
-  background: #FFFFFF;
-  border: 1px solid #E2E2E2;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 18px;
-  line-height: 21px;
-  margin: 0 0 16px;
-}
-/* Pannel-color */
-.panel-color,
-.panel-memory,
-.panel-os,
-.panel-display {
-  height: 142px;
-  display: flex;
-  flex-direction: column; 
-  padding-left: 20px;
-  padding-top: 17px;
-}
-.panel-os {
-  height: 80px;
-}
-.panel-display {
-  height: 150px;
+
+.panel-accordion {
+  padding: 15px 40px 15px 30px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+  border: 1px solid #dce2ee;
+  font: 16px/140% 'Roboto';
 }
 
-.column1 {
+.panel-accordion label {
   margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
 }
-.column2,
-.column3 {
-  margin-bottom: 8px;
+
+.panel-accordion label input {
+  width: 30px;
 }
-.check-green {
-  margin-left: 28px;
+
+.panel-price-accordion {
+  padding: 30px 30px 20px 30px;
+  border: 1px solid #dce2ee;
+  display: none;
 }
-.check-white {
-  margin-left: 16px;
+
+.panel-price-accordion label {
+  display: flex;
+  justify-content: space-between;
 }
-.check-gray {
-  margin-left: 24px;
+
+.input-min-price,
+.input-max-price {
+  margin-bottom: 15px;
+  padding: 8px 0;
+  border: 1px solid #e2e2e2;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+  font: 18px/140% 'Roboto';
 }
-.check-yellow {
-  margin-left: 22px;
+
+.input-max-price:focus {
+  border: 1px solid #e2e2e2;
+  box-shadow: 0px 1px 7px 1px #e2e2e2;
+  outline: none;
 }
-.type {
-  font-size: 16px;
-  line-height: 18px;
+
+.input-min-price:focus {
+  border: 1px solid #e2e2e2;
+  box-shadow: 0px 1px 7px 1px #e2e2e2;
+  outline: none;
 }
-.check-512 {
-  margin-left: 15px;
-}
-.check-1 {
-  margin-left: 15px;
-}
-.check-2 {
-  margin-left: 6px;
-}
-.check-4 {
-  margin-left: 10px;
-}
-.check-macos {
-  margin-left: 12px;
-}
-.check-12-16 {
-  margin-left: 6px;
-}
-  
-   /* /  */ /* /  */ /* /  */ /* /  */
+
+ /* /  */ /* /  */ /* /  */ /* /  */
 
 /* Cards */
 .cards-container  {
@@ -645,8 +665,11 @@ table {
 }
 .img-card {
   margin: 0 auto 26px;
-  width: 200px;
+  width: auto;
   height: 200px;
+  width: auto;
+  padding: 5%;
+  margin-bottom: 5px;
 }
 .item-name {
   font-size: 24px;
@@ -658,10 +681,7 @@ table {
 .stock {
   text-align: center;
   margin: 0 auto 4px;
-  width: 125px;
-  height: 24px;
-  display: flex;
-  
+  width: 160px;
 }
 
 .check {
@@ -709,6 +729,11 @@ table {
   bottom: 20px;
   left: 60px;
 }
+
+.disable-btn {
+  background-color: #c5c4c4;
+  cursor: auto;
+}
 .like-btn {
   margin: 0 auto;
   width: 50px;
@@ -734,6 +759,10 @@ table {
   border: 2px solid #E0E0E0;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
+}
+.like.active{
+  background-color: rgb(252, 156, 156);
+  border-radius: 20px;
 }
 
 .card-footer {

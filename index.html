@@ -97,17 +97,17 @@
                         </div>
                         <div class="swiper-slide">
                             <img class="image" src="img/banners/ipad_air_banner.jpg">
-                            <p class="text">iPad Air</p>
+                            <p class="text text-ipad">iPad Air</p>
                             <button class="btn">Add to cart</button>
                         </div>
                         <div class="swiper-slide">
                             <img class="image" src="img/banners/air_pods_max_banner.jpg">
-                            <p class="text">AirPods Max</p>
+                            <p class="text text-airpods">AirPods Max</p>
                             <button class="btn">Add to cart</button>
                         </div>
                         <div class="swiper-slide">
                             <img class="image" src="img/banners/iphone_12_banner.jpg">
-                            <p class="text">Iphone 12/ 12 Mini</p>
+                            <p class="text"></p>
                             <button class="btn">Add to cart</button>
                         </div>
                         <div class="swiper-slide">
@@ -119,12 +119,17 @@
                 </div>
             </header>
         <section> 
-        <!-- Search -->
+          <!-- Search -->
     
-        <section class="search-container">
+          <section class="search-container">
             <form novalidate="novalidate" onsubmit="return false;" class="searchbox">
                 <div role="search" class="searchbox__wrapper">
                   <input id="search-input" type="search" name="search" placeholder="Enter device name..." autocomplete="off" required="required" class="searchbox__input">
+                  <select id="sortFilter" class="sort-filter">
+                    <option value="default">Defauld</option>
+                    <option value="asc">Asc price</option>
+                    <option value="desc">Desc Price</option>
+                  </select>
                   <button type="submit" title="Submit your search query." class="searchbox__submit" >
                   <svg role="img" aria-label="Search">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-search-13"></use>
@@ -161,162 +166,25 @@
                         <symbol id="sbx-icon-search-13" viewBox="0 0 40 40"><path d="M26.806 29.012a16.312 16.312 0 0 1-10.427 3.746C7.332 32.758 0 25.425 0 16.378 0 7.334 7.333 0 16.38 0c9.045 0 16.378 7.333 16.378 16.38 0 3.96-1.406 7.593-3.746 10.426L39.547 37.34c.607.608.61 1.59-.004 2.203a1.56 1.56 0 0 1-2.202.004L26.807 29.012zm-10.427.627c7.322 0 13.26-5.938 13.26-13.26 0-7.324-5.938-13.26-13.26-13.26-7.324 0-13.26 5.936-13.26 13.26 0 7.322 5.936 13.26 13.26 13.26z" fill-rule="evenodd"/></symbol>
                     </svg>
         </section>
-        <!-- Main Content -->
+            <!-- Main Content -->
         <section class="main-content">
-                    <!-- Accordeon -->
-                <div class="accordeon-container">
-                    <button class="accordion">Price</button>
-                    <div class="panel-price">
-                        <form  action="#" method="#">
-                            <!-- From -->
-                            <label class="from" for="name">From:</label>
-                            <input class="field" type="text" id="from">
-                            <!-- to -->
-                            <label class="to" for="email">To:</label>
-                            <input class="field" type="text" id="to">
-                        </form>
-                    </div>
-
-                    <button class="accordion">Color</button>
-                    <div class="panel-color">
-                        <form  action="#" method="#">
-                            <div class="column1">
-                                <input class="check-red" type="checkbox" id="red" name="type">
-                                <label class="type" for="red">Red</label>
-                                <input class="check-green" type="checkbox" id="green" name="type">
-                                <label class="type" for="green">Green</label>
-                            </div>
-                            <div class="column2">
-                                <input class="check-black" type="checkbox" id="black" name="type">
-                                <label class="type" for="black">Black</label>
-                                <input class="check-white" type="checkbox" id="white" name="type">
-                                <label class="type" for="white">White</label>
-                            </div>
-                            <div class="column3">
-                                <input class="check-blue" type="checkbox" id="blue" name="type">
-                                <label class="type" for="blue">Blue</label>
-                                <input class="check-gray" type="checkbox" id="gray" name="type">
-                                <label class="type" for="gray">Gray</label>
-                             </div>
-                             <div class="column4">
-                            <input class="check-gold" type="checkbox" id="gold" name="type">
-                            <label class="type" for="gold">Gold</label>
-                            <input class="check-yellow" type="checkbox"id="yellow" name="type">
-                            <label class="type" for="yellow">Yelow</label>
-                            </div>
-                        </form>
-                    </div>
-
-                    <button class="accordion">Memory</button>
-                    <div class="panel-memory">
-                        <form  action="#" method="#">
-                            <div class="column1">
-                                <input class="check-32" type="checkbox" id="red" name="type">
-                                <label class="type" for="red">32 Gb</label>
-                                <input class="check-512" type="checkbox" id="green" name="type">
-                                <label class="type" for="green">512 Gb</label>
-                            </div>
-                            <div class="column2">
-                                <input class="check-64" type="checkbox" id="black" name="type">
-                                <label class="type" for="black">64 Gb</label>
-                                <input class="check-1" type="checkbox" id="white" name="type">
-                                <label class="type" for="white">1 Tb</label>
-                            </div>
-                            <div class="column3">
-                                <input class="check-128" type="checkbox" id="blue" name="type">
-                                <label class="type" for="blue">128 Gb</label>
-                                <input class="check-2" type="checkbox" id="gray" name="type">
-                                <label class="type" for="gray">2 T</label>
-                             </div>
-                             <div class="column4">
-                                <input class="check-256" type="checkbox" id="gold" name="type">
-                                <label class="type" for="gold">256Gb</label>
-                                <input class="check-4" type="checkbox"id="yellow" name="type">
-                                <label class="type" for="yellow">4 Tb</label>
-                            </div>
-                        </form>
-                    </div>
-
-                    <button class="accordion">OS</button>
-                    <div class="panel-os">
-                        <form  action="#" method="#">
-                            <div class="column1">
-                                <input class="check-ios" type="checkbox" id="red" name="type">
-                                <label class="type" for="red">IOS</label>
-                                <input class="check-macos" type="checkbox" id="green" name="type">
-                                <label class="type" for="green">Mac OS</label>
-                            </div>
-                            <div class="column2">
-                                <input class="check-tvos" type="checkbox" id="black" name="type">
-                                <label class="type" for="black">tvOS</label>
-                                <input class="check-watchos" type="checkbox" id="white" name="type">
-                                <label class="type" for="white">Watch OS</label>
-                            </div>
-                        </form>
-                    </div>
-
-                    <button class="accordion">Display</button>
-                    <div class="panel-display">
-                        <form  action="#" method="#">
-                            <div class="column1">
-                                <input class="check-32" type="checkbox" id="red" name="type">
-                                <label class="type" for="red">2 - 5 inch</label>
-                                <input class="check-512" type="checkbox" id="green" name="type">
-                                <label class="type" for="green">5 - 7 inch</label>
-                            </div>
-                            <div class="column2">
-                                <input class="check-64" type="checkbox" id="black" name="type">
-                                <label class="type" for="black">7 - 12 inch</label>
-                                <input class="check-12-16" type="checkbox" id="white" name="type">
-                                <label class="type" for="white">12 - 16 inch</label>
-                            </div>
-                            <div class="column3">
-                                <input class="check-128" type="checkbox" id="blue" name="type">
-                                <label class="type" for="blue">+16 inch</label>
-                            </div>
-                        </form>
+                    <!-- Accordion -->
+                <div class="accordion-container">
+                    <button class="accordion">
+                        <p class="accordion-title-text">Title</p>
+                            <img class="accordion-icon" src="img/icons/arrow_left.svg"  alt=""/>
+                    </button>
+                    <div class="panel-accordion">
+                        <label>
+                            <input type="checkbox">
+                            <span>Red</span>
+                        </label>
                     </div>
                 </div>
                 <!-- Cards -->
                 <div class="cards-container">
                     <div class="cards-items">
-                        <!-- <div class="card">
-                            <div  class="card-info">
-                                <div class="img-card">
-                                    <img src="" >
-                                </div>
-                                <p class="item-name">iPhone 11 Pro Max</p>
-                                <div class="stock">
-                                    <div class="stock check"></div>
-                                    <div class="stock in-stock"><span class="in-stock number-in-stock">70 </span> left in stock</div>
-                                </div>
-                                <div class="price">Price: <span class="price price-number">900</span> $</div>
-                                <button class="btn btn-card">Add to cart</button>
-                                <button class="like-btn">
-                                    <img class="like" src="img/icons/like_filled1.png">
-                                </button>
-                            </div>
-                            <div class="card-footer">
-                                <div class="like-permanent">
-                                    <img src="img/icons/like_filled1.png">
-                                </div>
-                                <div class="reviews">
-                                    <p class="reviews text-rewiew"><span class="reviews number-rewiews">70%</span>Positive reviews</p>
-                                    <p class="reviews reviews-above"> Above avarage</p>
-                                </div>
-                                <div class="orders">
-                                    <p class="number-of-orders">300</p>
-                                    <p class="orders-text">orders</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card"></div>
-                        <div class="card"></div>
-                        <div class="card"></div>
-                        <div class="card"></div>
-                        <div class="card"></div> -->
-                        <!-- Modal -->
-                        
+
                     </div> 
                 </div>
         </section>
@@ -325,7 +193,8 @@
      </section>
 
 </div>
-       
+
+        <!-- Modal -->       
 <div class="modal">
     <div class="innerModal">
         <div class="column-one">
@@ -367,6 +236,6 @@
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
         <script src="js/items.js"></script>
         <script src="js/index.js"></script>
-        <script>createCard(items)</script>
+        <!-- <script>createCard(items)</script> -->
     </body>
 </html>
