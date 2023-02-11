@@ -262,8 +262,9 @@ class ItemsModel {
 
 class RenderCards {
 	//  seems like dependancy injection ?
-	constructor(itemsModel) {
+	constructor(itemsModel, cart) {
 		this.cardsContainer = document.querySelector(".cards-items"); // Container  element
+		this.cart = cart;
 		this.renderCards(itemsModel.items); // Auto render cards after init page
 	}
 	
@@ -323,7 +324,8 @@ class RenderCards {
 			e.stopPropagation();
 		});
 
-		const button = cardElement.querySelector('.btn');
+		// for disable button and disable icons
+		const button = cardElement.querySelector('.btn-card');
     	const iconDisable = cardElement.querySelector('.card-availability');
 
 		if (item.isAvailableForBuy) {
@@ -336,6 +338,23 @@ class RenderCards {
 			iconDisable.classList.add('card-non-availability');
 		}
 
+		// 
+		// cardElement.onclick = (e) => {
+		// 	console.log(item);
+		// }
+		
+		button.addEventListener('click', () => {
+			cart.addToCart(item);
+			renderCart.renderCartItems(cart.items);
+		});
+
+		
+
+		// button.oncklick.addEventListener ('click', () => {
+		// 	cart.addToCart(item);
+		// 	renderCart.renderCartItems(cart.items);
+		// });
+
 		return cardElement;
 	}
 	
@@ -345,7 +364,7 @@ class RenderCards {
         this.cardsContainer.innerHTML = '';
 
         // Cereate elements with cards based on items list
-        const elements = items.map(item => RenderCards.renderCard(item));
+        const elements = items.map(item => RenderCards.renderCard.call(this, item));
 
         // Add elements to container
         this.cardsContainer.append(...elements);
@@ -528,11 +547,148 @@ class RenderFilters {
 	}
 }
 
+class Cart {
+	constructor(){
+		this.items = [];
+	}
+
+	addToCart(item) {
+		const id = item.id;
+		const itemInCart = this.items.find(addedItem => addedItem.id === id);
+		if (itemInCart){
+			if (itemInCart.amount < 4) {
+				itemInCart.amount++;
+			}
+			return itemInCart;
+		}
+		//якщо не undefined, тобто цього item ще не було додано до корзини, створення нового об'єкту
+		const newItemInCart  = {
+			id,
+			item,
+			amount: 1,
+		}
+
+		return this.items.push(newItemInCart);
+	}
+
+
+	get totalAmount(){
+		return this.items.reduce((acc, addedItem) => {
+			return acc + addedItem.amount;
+		}, 0);
+	}
+
+	get totalPrice() {
+		return this.items.reduce((acc, addedItem) => {
+			return acc + addedItem.amount * addedItem.item.price;
+		}, 0)
+	}
+
+	
+	minusItem(item) {
+		const id = item.id;
+		const itemInCart = this.items.find(addedItem => addedItem.id === id);
+		if (itemInCart.amount > 1) {
+			itemInCart.amount--;
+		}
+		return  cart.items;
+	}
+
+	removeItem(item) {
+		item.amount = 0;
+		this.items = this.items.filter(addedItem => addedItem.amount > 0);
+	}
+}
+
+class RenderCart {
+	constructor() {
+		this.cartContainer = document.querySelector('.cart-items-in-cart');
+		this.renderCartItems(cart.items);
+    	this.openCartModal();
+	}
+
+	renderCartItem(item) {
+		const cartItem = document.createElement('div');
+		cartItem.className = 'cart-elements';
+		cartItem.innerHTML = `
+				<img class="img-cart-item" src="${item.item.absoluteImgPath}" alt="${item.item.name}"/>
+				<div class="cart-right-side">
+					<p class="cart-item-name">${item.item.name}</p>
+					<p class="cart-item-price">$ ${item.item.price}</p>
+				</div>
+				<div class="cart-item-amount">
+					<img class="cart-item-amount-left-arrow" src="img/icons/arrow_left.png" alt=""/>
+					<p class="cart-item-quantity">${item.amount}</p>
+					<img class="cart-item-amount-right-arrow" src="img/icons/arrow_right.png" alt=""/>
+					<img  class="cart-item-remove" src="img/icons/remove.png" alt=""/>
+		`;
+
+		const totalAmount = document.querySelector('.total-item-quantity');
+		totalAmount.innerHTML = `Total amount: <span>${cart.totalAmount} ptc.</span>`;
+
+		const totalPrice = document.querySelector('.total-item-price');
+		totalPrice.innerHTML = `Total price: <span>$${cart.totalPrice}</span>`;
+
+		const cartIconItemAmount = document.querySelector('.number-in-cart');
+		if (cart.totalAmount > 0) {
+		cartIconItemAmount.classList.remove('cart-number-hidden');
+		cartIconItemAmount.innerHTML = `${cart.totalAmount}`;
+		} else {
+		cartIconItemAmount.classList.add('.cart-number-hidden');
+		}
+
+		const minusItem = cartItem.querySelector('.cart-item-amount-left-arrow');
+		minusItem.addEventListener('click', () => {
+			cart.minusItem(item);
+			renderCart.renderCartItems(cart.items);
+		});
+
+		const plusItem = cartItem.querySelector('.cart-item-amount-right-arrow');
+		plusItem.addEventListener('click', () => {
+			cart.addToCart(item);
+			renderCart.renderCartItems(cart.items);
+		});
+
+		const deleteItem = cartItem.querySelector('.cart-item-remove');
+		deleteItem.addEventListener('click', () => {
+			cart.removeItem(item);
+			renderCart.renderCartItems(cart.items);
+			totalAmount.innerHTML = `Total amount: <span>${cart.totalAmount} ptc.</span>`;
+			totalPrice.innerHTML = `Total price: <span>$${cart.totalPrice}</span>`;
+			cartIconItemAmount.innerHTML = `${cart.totalAmount}`;
+		});
+
+		return cartItem;
+	}
+
+	renderCartItems(items) {
+		this.cartContainer.innerHTML = ``;
+		let addedItems = items.map(item => {
+		  return this.renderCartItem(item);
+		});
+		return this.cartContainer.append(...addedItems);
+	}
+
+	  
+	
+	openCartModal() {
+		const cartIcon = document.querySelector('.cart-icon');
+		const cartModal = document.querySelector('.in-cart-items');
+	
+		cartIcon.addEventListener('click', () => {
+		  cartModal.classList.toggle('cart-hidden');
+		});
+	}
+
+}
 
 const itemsModel = new ItemsModel();
-const renderCards = new RenderCards(itemsModel);
+const cart = new Cart();
+const renderCart = new RenderCart(cart);
+const renderCards = new RenderCards(itemsModel, cart, renderCart);
 const filter = new Filter(itemsModel, renderCards);
-const renderFilters = new RenderFilters(itemsModel, filter)
+const renderFilters = new RenderFilters(itemsModel, filter);
+
 
 
 
@@ -542,16 +698,3 @@ const renderFilters = new RenderFilters(itemsModel, filter)
 // 	renderCards.renderCards(fondItems);
 // }
 
-
-
-/////////////// input
-
-// document.querySelector("#search-input").addEventListener("keyup", function() {
-// 	var searchbox = document.querySelector(".aa-input");
-// 	var reset = document.querySelector(".searchbox [type='reset']");
-// 	if (searchbox.value.length === 0){
-// 		reset.classList.add("hide");
-// 	} else {
-// 	  reset.classList.remove('hide');
-//   }
-// });
